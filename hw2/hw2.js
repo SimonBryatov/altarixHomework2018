@@ -53,29 +53,44 @@ console.log("\ngetTotalSum(): ");
 console.log(getTotalSum(1, 2, 3))
 console.log(getTotalSum(1, 1, 1))
 
-function uniDecorator() {
+let extendStringify = (key, value) => {
+    if (typeof value === "function") {
+        return "/Function(" + value.toString() + ")/";
+    }
+    return value;
+}
+
+function uniDecorator(func) {
     const cache = {};
     return function () {
-        let signature = JSON.stringify(arguments, function (key, value) {
-            if (typeof value === "function") {
-                return "/Function(" + value.toString() + ")/";
-            }
-            return value;
-        });
-        if (!cache[signature]) {
+        let argsSignature = JSON.stringify(arguments, extendStringify);
+        if (!cache[argsSignature]) {
+            cache[argsSignature] = func.apply(null, arguments);
             console.warn("Cache changed by new entry");
-            cache[signature] = "cached res";
             console.warn(cache);
         }
-        return cache[signature];
+        return cache[argsSignature];
     }
 }
 
 console.log("\nuniDecorator():")
-let decorate = uniDecorator();
 
-console.log("Output:", decorate(1, "sdsf", {x: 4}));
-console.log("Output:", decorate(1, "sdsf", {x: 4}, {o : "dog", say: function() {return "woof"}}));
-console.log("Output:", decorate(1, "sdsf", {x: 4}));
-console.log("Output:", decorate(1, "sdsf", {x: 4}));
-console.log("Output:", decorate(1, "sdsf", {x: 4}, () => 123));
+let add = function (a, b) {
+    return a + b
+};
+
+let decorated = uniDecorator(add);
+let decoratedParseInt = uniDecorator(parseInt);
+
+console.log("\nAdd with cache: ");
+console.log(decorated(1, 2));
+console.log(decorated(1, 3));
+console.log(decorated(1, 2));
+console.log(decorated(1, 3));
+console.log("\nParse Int with cache: ");
+console.log(decoratedParseInt("12"));
+console.log(decoratedParseInt("12"));
+console.log(decoratedParseInt("14"));
+console.log(decoratedParseInt("14"));
+console.log(decoratedParseInt("13"));
+console.log(decoratedParseInt("14"));
