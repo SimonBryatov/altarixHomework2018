@@ -1,0 +1,110 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gainsboro;
+}
+
+.content {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid black;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.inputs {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+a {
+    font-style: none;
+}
+
+a:link {
+    color: black;
+}
+
+ul {
+    list-style: none;
+    list-style-position: inside;
+    align-self: flex-start;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+.list-number {
+    margin-right: 10px;
+}
+
+.list-item__content {
+    display: flex;
+    align-items: center;
+}
+
+ul img {
+    height: 8vh;
+    widows: 8vh;
+    margin-right: 30px;
+}
+
+
+.inputs__btn-find {
+    font-size: 20px;
+}
+
+.inputs__username {
+    font-size: 20px;
+}
+
+table {
+    width: 30vw;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid black;
+}
+
+th {
+    background-color: #9a9a9a;
+}
+
+td {
+    height: 40px;
+}
+
+td:hover {
+    cursor: pointer;
+}
+
+.active {
+    background-color: greenyellow;
+}
