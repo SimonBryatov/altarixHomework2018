@@ -1,0 +1,43 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    height: 47vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    font-size: 20px;
+}
+
+table {
+    width: 30vw;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+}
+
+th {
+    background-color: #9a9a9a;
+}
+
+td {
+    height: 40px;
+}
+
+td:hover {
+  cursor: pointer;  
+}
+
+.active {
+    background-color: greenyellow;
+}
