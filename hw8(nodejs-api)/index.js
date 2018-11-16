@@ -45,5 +45,5 @@ app.delete('/deleteTodo', User.deleteTodo);
 
 app.use(errorHandler);
 
-app.listen(PORT, () => console.log('App has started at port ' + process.env.port))
+app.listen(port, () => console.log('App has started at port ' + process.env.port))
 
