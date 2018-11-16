@@ -17,10 +17,8 @@ mongoose.connect(`mongodb://${process.env.MONGO_LOGIN}:${process.env.MONGO_PASSW
     else console.log('Mongo connection failed:\n', err.message);
 })
 
-// app.options('*', cors());
-
-var corsOptions = {
-    origin: '*',
+const corsOptions = {
+    origin: process.env.ORIGIN,
     credentials: true,
     optionsSuccessStatus: 200
   }
@@ -30,10 +28,8 @@ app.use(morgan('tiny'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-//account routes
 app.post('/login', User.login);
 app.post('/register', User.register);
-//app.get('/logout', User.onLogout);
 
 app.use(authHandler);
 
