@@ -1,0 +1,12 @@
+.Header {
+    display: flex;
+    align-items: center;
+    flex-basis: 6%;
+    background-color: rgb(0, 89, 172);
+    color: white;
+    font-size: 2vh;
+}
+
+.Header-companionUserName {
+    margin-left: 40px;
+}

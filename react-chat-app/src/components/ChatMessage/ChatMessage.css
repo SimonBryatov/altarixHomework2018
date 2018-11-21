@@ -1,0 +1,29 @@
+.ChatMessage {
+    width: 10vw;
+    height: 4em;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.ChatMessage-message-avatar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.ChatMessage-message-avatar__icon {
+    font-size: 3.1vh;
+}
+
+.ChatMessage-message-avatar__username {
+    font-size: 1.2vh;
+}
+
+.ChatMessage-message-text {
+    background-color: rgb(183, 213, 233);
+    border-radius: 20%;
+    padding: .7vh 2vh .7vh 1vh;
+}
