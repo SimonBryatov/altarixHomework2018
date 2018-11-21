@@ -1,0 +1,9 @@
+.App {
+  display: flex;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: stretch;
+  background-color: rgb(255, 255, 255);
+}
