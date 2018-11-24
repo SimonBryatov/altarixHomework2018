@@ -14,7 +14,16 @@ body {
 #root {
   width: 48vw;
   height: 100vh;
+  overflow: hidden;
 }
+
+/* button {
+  font-size: 2vh;
+}
+
+button:hover {
+  
+} */
 
 .order-2 {
   order: 2;
@@ -22,6 +31,10 @@ body {
 
 .align-left {
   align-self: flex-start;
+}
+
+.justify-right {
+  justify-content: flex-end !important;
 }
 
 .align-right {

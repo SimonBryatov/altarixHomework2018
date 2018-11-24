@@ -2,12 +2,32 @@ import React from 'react';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import './ChatSpace.css';
 
-let renderMessages = (messages) => {
-    return messages.map((msg, ind) => <ChatMessage className="" message={msg} key={ind}/>)
-}
+class ChatSpace extends React.Component { 
 
-const ChatSpace = ({messages}) => (
-    <div className="ChatSpace">{renderMessages(messages)}</div>
-)
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+
+    componentDidUpdate({messages}) {
+        //if (messages[messages.length - 1].isOutgoing) {
+        this.scrollToBottom();
+        //}
+    }
+
+    scrollToBottom() {
+        this.container.scrollTop = this.container.scrollHeight;
+    }
+
+    renderMessages = () => {
+        return this.props.messages.map((msg) => <ChatMessage className="" message={msg} key={msg.id}/>)
+    }
+
+    render() {
+        return(
+            <div className="ChatSpace">
+            <div className="ChatSpace-messages" ref={(container) => {this.container = container}}>{this.renderMessages()}</div>
+            </div>
+        )}
+    }
 
 export default ChatSpace;
