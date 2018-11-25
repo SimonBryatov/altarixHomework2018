@@ -15,11 +15,15 @@ class Footer extends React.Component {
         this.setState({input: ''});
     }
 
+    keyListener = (event) => {
+        if (event.keyCode === 13 && event.ctrlKey) this.sendMessage();
+    }
+
     render() {
         return( 
             <footer className="Footer" data-grid="va-stretch">
                 <div className="Footer-textarea-container">
-                    <textarea className="Footer-textarea" onChange={this.onInputChange} value={this.state.input}></textarea>
+                    <textarea className="Footer-textarea" placeholder="Ctrl+Enter для отправки" onKeyDown = {this.keyListener} onChange={this.onInputChange} value={this.state.input}></textarea>
                 </div>
                 <div className='Footer-gap'></div>
                 <div className="Footer-button" onClick={this.sendMessage}><i className="Footer-button-icon far fa-paper-plane"></i></div>
