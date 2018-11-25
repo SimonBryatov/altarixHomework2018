@@ -1,4 +1,5 @@
 .App {
+  /* position: relative; */
   display: flex;
   font-family: 'Roboto', sans-serif;
   height: 100%;

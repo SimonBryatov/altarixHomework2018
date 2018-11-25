@@ -30,6 +30,10 @@
     font-size: 3vh
 }
 
+.Footer-gap {
+    flex-basis: 5%;
+}
+
 
 .Footer-button:hover {
     background-color: rgb(117, 144, 231);
