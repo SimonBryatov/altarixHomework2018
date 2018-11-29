@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import reducer from './reducer';
 
-let messages = [{id: '131232', userName: 'Алексаднр Анонимович', text: 'Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!', isOutgoing: false}, {id: '131432', userName: 'Я', text: 'Hello!', isOutgoing: true}, {id: '136232', userName: 'Федор Анон', text: 'Hello! Bla bla bla bla bla \n bal bal balsdks jdfkdj fkldj fkldjf!', isOutgoing: false}]
+//let messages = [{id: '131232', userName: 'Алексаднр Анонимович', text: 'Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!', isOutgoing: false}, {id: '131432', userName: 'Я', text: 'Hello!', isOutgoing: true}, {id: '136232', userName: 'Федор Анон', text: 'Hello! Bla bla bla bla bla \n bal bal balsdks jdfkdj fkldj fkldjf!', isOutgoing: false}]
 
 // messages = [...messages, ...messages];
 // messages = [...messages, ...messages];
@@ -10,8 +10,8 @@ let messages = [{id: '131232', userName: 'Алексаднр Анонимови�
 
 
 const initialState = {
-    messages: messages,
-    userName: 'Юзверь'
+    messages: [],
+    userName: 'Семён Брятов'
 }
 
 const logger = store => next => action => {

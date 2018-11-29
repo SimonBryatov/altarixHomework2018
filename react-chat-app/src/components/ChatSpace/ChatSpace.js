@@ -19,7 +19,7 @@ class ChatSpace extends React.Component {
     }
 
     renderMessages = () => {
-        return this.props.messages.map((msg) => <ChatMessage className="" message={msg} key={msg.id}/>)
+        return this.props.messages.map((msg) => <ChatMessage isOutgoing={this.props.userName === msg.name} message={msg} key={msg.id}/>)
     }
 
     render() {

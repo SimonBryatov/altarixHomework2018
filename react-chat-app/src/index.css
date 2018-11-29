@@ -12,18 +12,16 @@ body {
 }
 
 #root {
-  width: 48vw;
+  width: 80vh;
   height: 100vh;
   overflow: hidden;
 }
 
-/* button {
-  font-size: 2vh;
+@media screen and (max-width: 1030px) {
+  #root {
+    width: 100vw;
+  }
 }
-
-button:hover {
-  
-} */
 
 .order-2 {
   order: 2;
