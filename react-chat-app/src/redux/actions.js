@@ -1,14 +1,13 @@
-
-export const SEND_MESSAGE = 'SEND_MESSAGE';
+export const INPUT_VALUE_CHANGE = 'INPUT_VALUE_CHANGE';
 export const LOG_OUT = 'LOG_OUT';
 export const LOG_IN = 'LOG_IN';
 export const UPDATE_MESSAGE_POOL = 'UPDATE_MESSAGE_POOL';
 
-export function sendMessage(id, text) {
+
+export function inputValueChange(value) {
     return {
-        type: SEND_MESSAGE,
-        id,
-        text
+        type: INPUT_VALUE_CHANGE,
+        value
     }
 }
 

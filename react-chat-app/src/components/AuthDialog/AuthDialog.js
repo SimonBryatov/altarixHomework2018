@@ -2,21 +2,23 @@ import React from 'react';
 import './AuthDialog.css';
 
 class AuthDialog extends React.Component {
-    state={ login: '' }
-    setInput = (e) => {
-        this.setState({login: e.target.value})
-    }
+
     handleLogIn = () => {
-        this.props.onLogIn(this.state.login);
-        this.setState({ login: '' });
+        const userName = this.props.inputValue;
+        if (userName !=='') this.props.onLogIn(userName)
     }
+
+    handleInputChange = (e) => {
+        this.props.onInputChange(e.target.value);
+    }
+
     render() {
         return(    
             this.props.isOpened ? 
                 <div className='AuthDialog'>
                     <div className='AuthDialog-form'>
                     <h2>Чатик</h2>
-                    <input className='AuthDialog-input' placeholder='Логин' value={this.state.login} onChange={this.setInput}></input>
+                    <input className='AuthDialog-input' placeholder='Логин' onChange={this.handleInputChange} value={this.props.inputValue}></input>
                     <button onClick={this.handleLogIn} className='AuthDialog-button'>Войти</button>
                     </div>
                 </div>

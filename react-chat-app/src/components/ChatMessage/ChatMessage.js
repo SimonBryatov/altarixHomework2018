@@ -2,6 +2,7 @@ import React from 'react';
 import './ChatMessage.css';
 import HideMe from '../HideMe/HideMe';
 import classNames from 'classnames';
+
 const ChatMessage = ({message, isOutgoing}) => {
     return (<div className={classNames('ChatMessage',  {'justify-right': isOutgoing})}>
         <div className={classNames("ChatMessage-message-avatar", {'order-2': isOutgoing})}>

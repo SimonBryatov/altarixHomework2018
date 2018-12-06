@@ -8,10 +8,8 @@ class ChatSpace extends React.Component {
         this.scrollToBottom();
     }
 
-    componentDidUpdate({messages}) {
-        //if (messages[messages.length - 1].isOutgoing) {
+    componentDidUpdate() {
         this.scrollToBottom();
-        //}
     }
 
     scrollToBottom() {
@@ -19,7 +17,11 @@ class ChatSpace extends React.Component {
     }
 
     renderMessages = () => {
-        return this.props.messages.map((msg) => <ChatMessage isOutgoing={this.props.userName === msg.name} message={msg} key={msg.id}/>)
+        const messages = this.props.messages.filter((msg) => {
+            const msgHasStrangeShape = Object.values(msg).reduce((acc, el) => typeof el === 'object' ? true : acc, false);
+            return !msgHasStrangeShape && msg.id;
+        }) 
+        return messages.map((msg) => <ChatMessage isOutgoing={this.props.userName === msg.name} message={msg} key={msg.id}/>)
     }
 
     render() {
