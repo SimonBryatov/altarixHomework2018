@@ -4,7 +4,7 @@ const UserModel = require('../models/UserModel');
 import {Response, NextFunction} from 'express';
 import IRequest from '@/interfaces/IRequest';
 
-module.exports = async (req: IRequest, res:Response, next:NextFunction) => {
+module.exports = async (req: IRequest, res:Response, next:NextFunction): Promise<any> => {
     try {
     let userData = checkToken(req.cookies.jwt);
     req.userData = userData; 
