@@ -4,13 +4,16 @@ const ToDoEntryModel = require('../models/ToDoEntryModel');
 const sha512 = require('hash.js/lib/hash/sha/512');
 const uuidv1 = require('uuid/v1');
 const { issueToken } = require('../helpers/jwtHelpers');
+import {Response} from 'express';
+import IRequest from '@/interfaces/IRequest';
+import IUser from '@/interfaces/IUser';
+import IToDo from '@/interfaces/IToDo';
 
-async function resetSessions(req, res) {
+async function resetSessions(req: IRequest, res: Response) {
     try {
     const userLogin = req.userData.login;
-    let user = await UserModel.find({ login: userLogin });
-    user = user[0];   
-    let session_uuid = uuidv1();
+    let user: IUser = await UserModel.findOne({ login: userLogin });   
+    let session_uuid: string = uuidv1();
     user.jwtActiveUUID = session_uuid;
     await user.save();
     successResponse(res, {}, 200);
@@ -19,15 +22,11 @@ async function resetSessions(req, res) {
     }
 }
 
-
-async function login(req, res) {
+async function login(req: IRequest, res: Response) {
     try {
     const userLogin = req.body.login;
     const userPassword = req.body.password; 
-    let user = await UserModel.find({ login: userLogin });
-    
-    user = user[0];
-
+    let user: IUser = await UserModel.findOne({ login: userLogin });
     if (!user || user.password !== sha512().update(userPassword).digest('hex')) {
         throw {message: "Wrong login/password provided", status: 401};
     }
@@ -41,24 +40,24 @@ async function login(req, res) {
     }
 }
 
-async function register(req, res) {
+async function register(req: IRequest, res: Response) {
     try {
         const userLogin = req.body.login;
         const userPassword = req.body.password; 
-        let user = await UserModel.find({ login: userLogin });
-
-        if (user.length) throw {message: "User with this login has already been created", status: 400};
+        const users: IUser[] = await UserModel.find({ login: userLogin });
+        
+        if (users.length) throw {message: "User with this login has already been created", status: 400};
 
         let session_uuid = uuidv1();
 
-        user = await UserModel.create({
+        await UserModel.create({
             login: userLogin,
             password: sha512().update(userPassword).digest('hex'),
             email: req.body.email,
             jwtActiveUUID: session_uuid
         });  
 
-        let token = issueToken({uuid: session_uuid, login: userLogin});
+        let token: string = issueToken({uuid: session_uuid, login: userLogin});
 
         successResponse(res, token, 200);
 
@@ -67,28 +66,26 @@ async function register(req, res) {
     }
 }
 
-async function getUserToDoEntries(req, res) {
+async function getUserToDoEntries(req: IRequest, res: Response) {
     try {
-        let userTodos = await ToDoEntryModel.find({creatorLogin: req.userData.login});
+        let userTodos: IToDo[] = await ToDoEntryModel.find({creatorLogin: req.userData.login});
         successResponse(res, {todos: userTodos}, 200);
     } catch(err) {
         errorResponse(err, res)
     }
 }
 
-async function addTodo(req, res) {
+async function addTodo(req: IRequest, res: Response) {
     try {
-    let user = req.userData;    
-    let todo = await ToDoEntryModel.create({creatorLogin: user.login, caption: req.body.caption});
-    successResponse(res, {
-        message: 'Todo has been created'
-    }, 200)
+        let user = req.userData;    
+        await ToDoEntryModel.create({creatorLogin: user.login, caption: req.body.caption});
+        successResponse(res, {message: 'Todo has been created'}, 200);
     } catch(err) {
         errorResponse(err, res)
     }
 }
 
-async function updateTodoStatus(req, res) {
+async function updateTodoStatus(req: IRequest, res: Response) {
     try {
         let user = req.userData; 
         let newTodoStatus = req.body.todoStatus;
@@ -103,7 +100,7 @@ async function updateTodoStatus(req, res) {
         }
 }
 
-async function deleteTodo(req, res) {
+async function deleteTodo(req: IRequest, res: Response) {
     try {
         let user = req.userData;
         await ToDoEntryModel.findOneAndDelete({creatorLogin: user.login, _id: req.body.todoId});

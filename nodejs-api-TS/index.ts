@@ -1,4 +1,5 @@
-require('dotenv').config();
+export {};
+require('dotenv').config({path: '../.env'});
 const app = require('express')();
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -12,7 +13,7 @@ const User = require('./controllers/User');
 
 const port = process.env.PORT || 8080;
 
-mongoose.connect(`mongodb://${process.env.MONGO_LOGIN}:${process.env.MONGO_PASSWORD}@ds024748.mlab.com:24748/todo-app`, { useNewUrlParser: true }, (err) => {
+mongoose.connect(`mongodb://${process.env.MONGO_LOGIN}:${process.env.MONGO_PASSWORD}@ds024748.mlab.com:24748/todo-app`, { useNewUrlParser: true }, (err: any) => {
     if (!err) console.log('Connected to remote MongoDB')
     else console.log('Mongo connection failed:\n', err.message);
 })
@@ -41,5 +42,5 @@ app.delete('/deleteTodo', User.deleteTodo);
 
 app.use(errorHandler);
 
-app.listen(port, () => console.log('App has started at port ' + process.env.port))
+app.listen(port, () => console.log('App has started at port ' + process.env.Port))
 

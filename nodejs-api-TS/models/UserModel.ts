@@ -1,3 +1,4 @@
+export {};
 const mongoose = require('mongoose');
 const UserSchema = require('../schemas/UserSchema');
 
