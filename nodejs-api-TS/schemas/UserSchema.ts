@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import {Schema} from 'mongoose'
 
 //в идеале, можно cделать отдельный стор для сессий, но я добавил простую деактивацию токенов
 

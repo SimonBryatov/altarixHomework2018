@@ -1,6 +1,4 @@
-export {};
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import {Schema} from 'mongoose';
 
 const ToDoEntrySchema = new Schema({
     creatorLogin:  String,

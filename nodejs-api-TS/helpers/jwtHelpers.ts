@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-const cert = process.env.JWT_SECRET as string;
 import IUserAuthCredentials from '@/interfaces/IUserAuthCredentials';
+const cert = process.env.JWT_SECRET as string;
 
 function issueToken(userData: IUserAuthCredentials) {
     return jwt.sign(userData, cert, {expiresIn: '14d'});

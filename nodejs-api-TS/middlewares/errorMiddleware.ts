@@ -1,4 +1,3 @@
-export {};
 const {errorResponse} = require('../helpers/responseHelpers')
 import {Request, Response, NextFunction} from 'express';
 

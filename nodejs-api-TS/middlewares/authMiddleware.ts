@@ -1,4 +1,3 @@
-export {};
 const { errorResponse } = require('../helpers/responseHelpers')
 const { checkToken } = require('../helpers/jwtHelpers');
 const UserModel = require('../models/UserModel');

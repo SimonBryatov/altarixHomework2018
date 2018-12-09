@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require('dotenv').config({ path: '../.env' });
+require('dotenv').config({ path: './.env' });
 var app = require('express')();
 var cors = require('cors');
 var bodyParser = require('body-parser');

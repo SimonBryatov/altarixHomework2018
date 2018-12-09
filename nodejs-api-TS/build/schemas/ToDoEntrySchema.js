@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var ToDoEntrySchema = new Schema({
+var mongoose_1 = require("mongoose");
+var ToDoEntrySchema = new mongoose_1.Schema({
     creatorLogin: String,
     caption: String,
     status: { type: String, default: 'incompleted' },
