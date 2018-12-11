@@ -22,4 +22,9 @@ describe('CalendarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should generate Date Array', () => {
+    expect(component.days).toBeTruthy();
+  })
+  
 });
