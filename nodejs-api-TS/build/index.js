@@ -18,7 +18,7 @@ mongoose.connect("mongodb://" + process.env.MONGO_LOGIN + ":" + process.env.MONG
         console.log('Mongo connection failed:\n', err.message);
 });
 var corsOptions = {
-    origin: process.env.ORIGIN,
+    origin: '*',
     credentials: true,
     optionsSuccessStatus: 200
 };
@@ -33,6 +33,6 @@ app.get('/resetSessions', User.resetSessions);
 app.get('/getUserToDoEntries', User.getUserToDoEntries);
 app.post('/addTodo', User.addTodo);
 app.post('/updateTodoStatus', User.updateTodoStatus);
-app.delete('/deleteTodo', User.deleteTodo);
+app.delete('/deleteTodo:id', User.deleteTodo);
 app.use(errorHandler);
 app.listen(port, function () { return console.log('App has started at port ' + process.env.Port); });

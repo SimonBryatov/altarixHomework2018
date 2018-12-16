@@ -45,7 +45,7 @@ module.exports = function (req, res, next) { return __awaiter(_this, void 0, voi
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                userData = checkToken(req.cookies.jwt);
+                userData = checkToken(req.headers.authorization);
                 req.userData = userData;
                 return [4 /*yield*/, UserModel.find({ login: userData.login }, function (err) { if (err)
                         next(err); })];

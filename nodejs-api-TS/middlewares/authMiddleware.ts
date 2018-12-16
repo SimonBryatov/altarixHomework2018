@@ -6,7 +6,7 @@ import IRequest from '@/interfaces/IRequest';
 
 module.exports = async (req: IRequest, res:Response, next:NextFunction): Promise<any> => {
     try {
-    let userData = checkToken(req.cookies.jwt);
+    let userData = checkToken(req.headers.authorization);
     req.userData = userData; 
     let user = await UserModel.find({login: userData.login}, (err: Error) => {if (err) next(err)});   
     if (user[0].jwtActiveUUID !== userData.uuid) throw 1;

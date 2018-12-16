@@ -59,7 +59,7 @@ async function register(req: IRequest, res: Response) {
 
         let token: string = issueToken({uuid: session_uuid, login: userLogin});
 
-        successResponse(res, token, 200);
+        successResponse(res, {token, userLogin}, 200);
 
     } catch (err) {
         errorResponse(err, res)
@@ -88,7 +88,7 @@ async function addTodo(req: IRequest, res: Response) {
 async function updateTodoStatus(req: IRequest, res: Response) {
     try {
         let user = req.userData; 
-        let newTodoStatus = req.body.todoStatus;
+        let newTodoStatus = req.body.newStatus;
         let possibleStatuses = ['completed', 'incompleted'];
         if (possibleStatuses.indexOf(newTodoStatus) < 0) throw {message: 'Invalid todo status provided', status: 400};    
         await ToDoEntryModel.updateOne({creatorLogin: user.login, _id: req.body.todoId}, {status: newTodoStatus});
@@ -103,7 +103,7 @@ async function updateTodoStatus(req: IRequest, res: Response) {
 async function deleteTodo(req: IRequest, res: Response) {
     try {
         let user = req.userData;
-        await ToDoEntryModel.findOneAndDelete({creatorLogin: user.login, _id: req.body.todoId});
+        await ToDoEntryModel.findOneAndDelete({creatorLogin: user.login, _id: req.params.id});
         successResponse(res, {
             message: 'Todo has been deleted'
         }, 200)

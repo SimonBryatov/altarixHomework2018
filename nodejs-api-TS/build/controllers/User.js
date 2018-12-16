@@ -119,7 +119,7 @@ function register(req, res) {
                 case 2:
                     _a.sent();
                     token = issueToken({ uuid: session_uuid, login: userLogin });
-                    successResponse(res, token, 200);
+                    successResponse(res, { token: token, userLogin: userLogin }, 200);
                     return [3 /*break*/, 4];
                 case 3:
                     err_3 = _a.sent();
@@ -181,7 +181,7 @@ function updateTodoStatus(req, res) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
                     user = req.userData;
-                    newTodoStatus = req.body.todoStatus;
+                    newTodoStatus = req.body.newStatus;
                     possibleStatuses = ['completed', 'incompleted'];
                     if (possibleStatuses.indexOf(newTodoStatus) < 0)
                         throw { message: 'Invalid todo status provided', status: 400 };
@@ -209,7 +209,7 @@ function deleteTodo(req, res) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
                     user = req.userData;
-                    return [4 /*yield*/, ToDoEntryModel.findOneAndDelete({ creatorLogin: user.login, _id: req.body.todoId })];
+                    return [4 /*yield*/, ToDoEntryModel.findOneAndDelete({ creatorLogin: user.login, _id: req.params.id })];
                 case 1:
                     _a.sent();
                     successResponse(res, {
