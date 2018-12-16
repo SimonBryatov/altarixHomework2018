@@ -1,0 +1,9 @@
+<div class='todo' (click)='toggle()' [ngClass]="todo.status === 'completed' ? 'completed' : ''">
+  <p class='caption'>{{todo.caption}}</p>
+  <p class='status'>{{status}}</p>
+  <div class='creation-date'>
+    <div>Создано</div>
+    <div>{{todo.createdAt | date}}</div>
+  </div>
+  <button (click)='delete($event)' >X</button>
+</div>

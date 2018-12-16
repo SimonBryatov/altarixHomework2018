@@ -1,0 +1,11 @@
+<div class='header'>
+  <h2>Todo App Pro 9000+ (Angular Edition)</h2>
+  <div>
+  <a *ngIf='authService.userName'>{{'Привет, ' + authService.userName}}</a>
+  <a *ngIf='!authService.userName' href='#' routerLink='/login'>Вход</a>
+  <a *ngIf='!authService.userName' href='#' routerLink='/register'>Регистрация</a>
+  <a *ngIf='authService.userName' href='#' routerLink='/todoList'>Мои ToDo</a>
+  <a *ngIf='authService.userName' href='#' routerLink='/addTodo'>Новый ToDo</a>
+  <a *ngIf='authService.userName' href='#' routerLink='/' (click)='onLogout()'>Выйти</a>
+  </div>
+</div>

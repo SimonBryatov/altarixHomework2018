@@ -1,0 +1,17 @@
+body {
+    font-family: 'Roboto', 'sans-serif';
+    display: flex;
+    justify-content: center;
+    background-color: rgb(170, 192, 233);
+}
+
+.app-root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100vh;
+}
+
+h1, h2 {
+    text-align: center;
+}
