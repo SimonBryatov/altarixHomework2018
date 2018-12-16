@@ -1,1 +1,1 @@
-web: node ./hw8\(nodejs-api\)/index.js
+web: node ./hw8\(nodejs-api-TS\)/build/index.js
