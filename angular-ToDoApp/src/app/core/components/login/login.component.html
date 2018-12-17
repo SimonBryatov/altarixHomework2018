@@ -1,0 +1,9 @@
+<h2>Вход</h2>
+<form [formGroup]="form" (ngSubmit)='submit()'>
+  <p>Логин</p>
+  <input type='text' formControlName="login"/>
+  <p>Пароль</p>
+  <input type='password' formControlName="password"/>
+  <div class='form-alert' *ngIf='form.touched && form.invalid'>Поля должны быть обязательно заполнены!</div>
+  <button class='form-button_send' [disabled]='form.invalid'>Войти</button>
+</form>

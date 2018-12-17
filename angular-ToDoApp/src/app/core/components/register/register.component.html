@@ -1,0 +1,12 @@
+<h2>Регистрация</h2>
+<form [formGroup]="form" (ngSubmit)='onSubmit()'>
+    <p>E-mail</p>
+    <div class='form-alert' *ngIf='form.touched && form.get("email").invalid'>Введены некорректные данные</div>
+    <input type='text' formControlName="email"/>
+    <p>Логин</p>
+    <input type='text' formControlName="login"/>
+    <p>Пароль</p>
+    <input type='password' formControlName="password"/>
+    <div class='form-alert' *ngIf='form.touched && form.invalid'>Поля должны быть обязательно заполнены!</div>
+    <button class='form-button_send' [disabled]='form.invalid'>Зарегистрироваться</button>
+</form>
