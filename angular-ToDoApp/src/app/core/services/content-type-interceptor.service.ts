@@ -15,6 +15,6 @@ export class ContentTypeInterceptorService {
       'Authorization': jwt ? jwt : ''
     });
     const clone = req.clone({headers});
-    return next.handle(clone);
+    return next.handle(clone)
   }
 }

@@ -1,8 +1,16 @@
-export default async (f) => {
-    return async (...args) => {
-    console.log(1);
-    const value = await f(...args)
-    console.log(2);
-    return value
+export function withLoader(a) {
+    return function(target: any, key: string, descriptor: any) {
+      const originalMethod = descriptor.value; 
+        
+        descriptor.value = async function (...args: any[]) {
+        //console.log(target);
+        console.log(`Entering ${key} method`);
+        let result = await originalMethod.apply(this, args);
+        console.log(`Leaving ${key} method` );
+  
+        return result;
+      }
+  
+      return descriptor;
     }
-}
+  }

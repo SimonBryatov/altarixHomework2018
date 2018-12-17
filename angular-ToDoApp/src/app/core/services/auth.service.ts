@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import Cookies from 'js-cookie';
 import { ErrorService } from './error.service';
 import { Router } from '@angular/router';
 import { TodoService } from './todo.service';
 import { LoaderService } from './loader.service';
-import withLoader from '../utils/withLoader';
 
 interface Credentials {
   login: string,
@@ -41,6 +40,7 @@ export class AuthService {
   }
 
   async register(credentials: Credentials) {
+    this.loaderService.start();
     try {
       const response = await this.http.post('https://todohub.herokuapp.com/register', JSON.stringify(credentials)).toPromise() as string;
       const data: ResponseData = JSON.parse(response);
@@ -48,9 +48,11 @@ export class AuthService {
     } catch(err) {
       this.errorService.handleResponseError(err);
     }
+    this.loaderService.stop();
   }
 
   async login(credentials: Credentials) {
+    this.loaderService.start();
     try {
     const response = await this.http.post('https://todohub.herokuapp.com/login', JSON.stringify(credentials)).toPromise() as string;
     const data: ResponseData = JSON.parse(response);
@@ -58,6 +60,7 @@ export class AuthService {
     } catch(err) {
       this.errorService.handleResponseError(err);
     }
+    this.loaderService.stop();
   }
 
   logout() {

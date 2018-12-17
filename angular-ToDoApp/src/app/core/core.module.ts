@@ -15,6 +15,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {ContentTypeInterceptorService} from './services/content-type-interceptor.service';
 import { ErrorComponent } from './components/error/error.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { TimeoutInterceptor } from './services/timeout-interceptor.service';
 
 @NgModule({
   declarations: [TodoListComponent, TodoComponent, LoginComponent, HeaderComponent, AddTodoComponent, RegisterComponent, StartComponent, ErrorComponent, LoaderComponent],
@@ -28,6 +29,11 @@ import { LoaderComponent } from './components/loader/loader.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ContentTypeInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TimeoutInterceptor,
       multi: true
     }
   ],

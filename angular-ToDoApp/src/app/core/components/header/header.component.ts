@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HeaderComponent {
 
-  constructor(private todoService: TodoService, public authService: AuthService) { 
+  constructor(private todoService: TodoService, protected authService: AuthService) { 
 
   }
 

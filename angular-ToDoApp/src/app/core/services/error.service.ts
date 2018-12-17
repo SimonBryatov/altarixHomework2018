@@ -8,7 +8,18 @@ export class ErrorService {
   constructor() { }
 
   handleResponseError(err) {
+    if (err.statusText) {
     this.errorMessage = err.statusText;
+    this.resetMessage()
+    }
+  }
+
+  handleCustomError(msg) {
+    this.errorMessage = msg;
+    this.resetMessage();
+  }
+
+  resetMessage() {
     setTimeout(() => {this.errorMessage = ''}, 2000)
   }
 }
