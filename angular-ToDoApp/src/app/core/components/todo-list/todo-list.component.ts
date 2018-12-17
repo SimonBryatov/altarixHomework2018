@@ -11,7 +11,7 @@ import { ToDo } from '../../services/todo.service';
 })
 export class TodoListComponent implements OnInit {
   todos
-  constructor(protected todoService: TodoService, private errorService: ErrorService) { }
+  constructor(public todoService: TodoService, private errorService: ErrorService) { }
 
   async ngOnInit() {
     this.todoService.getUserTodos();

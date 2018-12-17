@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TodoService } from '../../services/todo.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -9,8 +8,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HeaderComponent {
 
-  constructor(private todoService: TodoService, protected authService: AuthService) { 
-
+  constructor(public authService: AuthService) { 
   }
 
   onLogout() {
