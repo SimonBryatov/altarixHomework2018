@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import {ErrorService} from './error.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoaderService } from './loader.service';
+import { BehaviorSubject, of } from 'rxjs';
+import { share, map, tap, catchError } from 'rxjs/operators';
 
 export interface ToDo {
   _id: string,
@@ -15,9 +17,15 @@ export interface ToDo {
   providedIn: 'root'
 })
 export class TodoService {
-  todos: ToDo[];
+  private baseUrl = 'https://todohub.herokuapp.com' //'http://localhost:8080' 
+  private todosSubject = new BehaviorSubject([]);
+  todos$ = this.todosSubject.asObservable();
   constructor(private http: HttpClient, private errorService: ErrorService, private router: Router, private loaderService: LoaderService) {}
   
+  reset() {
+    this.todosSubject.next([]);
+  }
+
   filterTodosAndSave(todos: ToDo[]) {
     const completedTodos: ToDo[] = [];
     const incompletedTodos: ToDo[] = [];
@@ -28,51 +36,57 @@ export class TodoService {
         incompletedTodos.push(todo);
       }
     })
-    this.todos = incompletedTodos.concat(completedTodos);
+    this.todosSubject.next(incompletedTodos.concat(completedTodos));
   }
   
-    async getUserTodos() {
+  getUserTodos() {
     this.loaderService.start();
-    try {
-    let response = await this.http.get('https://todohub.herokuapp.com/getUserToDoEntries').toPromise() as string;
-    this.filterTodosAndSave(JSON.parse(response).todos);
-    } catch (err) {
-      this.errorService.handleResponseError(err);
-    }
-    this.loaderService.stop();
+    const userTodos$ = this.http.get<string>(`${this.baseUrl}/getUserToDoEntries`).pipe(share());
+    userTodos$.pipe(
+      map(data => JSON.parse(data)),
+      tap(({todos}) => this.filterTodosAndSave(todos)),
+      tap(() => this.loaderService.stop()),
+      catchError((err) => {
+        this.errorService.parseError(err);
+        return of(err);
+        })
+    ).subscribe();
   }
 
-  async addToDo(caption: string) {
+  addToDo(caption: string) {
     this.loaderService.start();
-    try {
-      let response = await this.http.post('https://todohub.herokuapp.com/addTodo', caption).toPromise() as string;
-      this.getUserTodos();
-      this.router.navigate(['todoList']);
-    } catch(err) {
-      this.errorService.handleResponseError(err)
-      this.loaderService.stop();
-    }
+      const response$ = this.http.post(`${this.baseUrl}/addTodo`, caption);
+      response$.pipe(
+        tap(() => this.getUserTodos()),
+        tap(() => this.router.navigate(['todoList'])),
+        catchError((err) => {
+          this.errorService.parseError(err);
+          return of(err);
+          })
+      ).subscribe();
   }
 
-  async toggleToDo(todoId: string, newStatus: string) {
+  toggleToDo(todoId: string, newStatus: string) {
     this.loaderService.start();
-    try {
-      let response = await this.http.post('https://todohub.herokuapp.com/updateTodoStatus', {todoId, newStatus}).toPromise() as string;
-      this.getUserTodos();
-    } catch(err) {
-      this.errorService.handleResponseError(err)
-      this.loaderService.stop();
-    }
+      const response$ = this.http.post(`${this.baseUrl}/updateTodoStatus`, {todoId, newStatus});
+      response$.pipe(
+        tap(() => this.getUserTodos()),
+        catchError((err) => {
+          this.errorService.parseError(err);
+          return of(err);
+          })
+      ).subscribe();
   }
 
-  async deleteToDo(todoId: string) {
+  deleteToDo(todoId: string) {
     this.loaderService.start();
-    try {
-      let response = await this.http.delete('https://todohub.herokuapp.com/deleteTodo' + todoId).toPromise() as string;
-      this.getUserTodos();
-    } catch(err) {
-      this.errorService.handleResponseError(err)
-      this.loaderService.stop();
-    }
+      const response$ = this.http.delete(`${this.baseUrl}/deleteTodo` + todoId);
+      response$.pipe(
+        tap(() => this.getUserTodos()),
+        catchError((err) => {
+          this.errorService.parseError(err);
+          return of(err);
+          })
+      ).subscribe();
   }
 }
