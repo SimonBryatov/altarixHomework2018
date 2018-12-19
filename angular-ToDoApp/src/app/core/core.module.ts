@@ -16,6 +16,7 @@ import {ContentTypeInterceptorService} from './services/content-type-interceptor
 import { ErrorComponent } from './components/error/error.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { TimeoutInterceptor } from './services/timeout-interceptor.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [TodoListComponent, TodoComponent, LoginComponent, HeaderComponent, AddTodoComponent, RegisterComponent, StartComponent, ErrorComponent, LoaderComponent],
@@ -23,7 +24,8 @@ import { TimeoutInterceptor } from './services/timeout-interceptor.service';
     CommonModule,
     CoreRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule, 
+    BrowserAnimationsModule
   ],
   providers: [
     {

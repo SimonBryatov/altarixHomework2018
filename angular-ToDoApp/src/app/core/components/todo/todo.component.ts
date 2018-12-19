@@ -1,10 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ToDo, TodoService } from '../../services/todo.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.scss']
+  styleUrls: ['./todo.component.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({
+        opacity: 0
+      })),
+      transition('void <=> *', animate(250)),
+    ]),
+  ]
 })
 export class TodoComponent implements OnInit {
   @Input('todo') todo: ToDo 

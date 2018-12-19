@@ -1,4 +1,4 @@
-<div class='todo' (click)='toggle()' [ngClass]="todo.status === 'completed' ? 'completed' : ''">
+<div class='todo' (click)='toggle()' [@fadeInOut] [ngClass]="todo.status === 'completed' ? 'completed' : ''">
   <p class='caption'>{{todo.caption}}</p>
   <p class='status'>{{status}}</p>
   <div class='creation-date'>

@@ -1,21 +1,29 @@
 import { Injectable } from '@angular/core';
+import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorService {
   errorMessage: string;
-  constructor() { }
+  constructor(private loaderService: LoaderService) { }
 
-  handleResponseError(err) {
+  parseError(err) {
+    this.loaderService.stop();
     if (err.statusText) {
-    this.errorMessage = err.statusText;
-    this.resetMessage()
+      this.handleCustomError(err.statusText);
+    } else {
+      this.handleNetworkError();
     }
   }
 
   handleCustomError(msg) {
     this.errorMessage = msg;
+    this.resetMessage();
+  }
+
+  handleNetworkError() {
+    this.errorMessage = 'Что-то пошло не так. Попробуйте снова :('
     this.resetMessage();
   }
 

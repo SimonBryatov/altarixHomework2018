@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { timeout, catchError } from 'rxjs/operators';
-//import { ErrorService } from './error.service';
-//import { of } from 'rxjs';
+import { timeout } from 'rxjs/operators';
 
 @Injectable()
 export class TimeoutInterceptor implements HttpInterceptor {
@@ -12,10 +10,3 @@ export class TimeoutInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(timeout(5000))
   }
 }
-
-// , catchError((err) => {
-//   if (!err.statusText) {
-//     this.errorService.handleCustomError('Повторите снова :(');
-//    }
-//   return of(null)
-// })

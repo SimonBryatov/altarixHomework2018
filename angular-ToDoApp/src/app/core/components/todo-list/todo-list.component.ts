@@ -10,8 +10,8 @@ import { ToDo } from '../../services/todo.service';
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent implements OnInit {
-  todos
-  constructor(public todoService: TodoService, private errorService: ErrorService) { }
+  todos$ = this.todoService.todos$
+  constructor(public todoService: TodoService) { }
 
   async ngOnInit() {
     this.todoService.getUserTodos();

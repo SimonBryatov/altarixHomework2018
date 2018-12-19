@@ -11,7 +11,8 @@ import {AnonymousGuard} from './services/anonymous.guard';
 
 const routes: Routes = [{
   path: '',
-  component: StartComponent 
+  component: StartComponent,
+  canActivate: [AnonymousGuard]  
 },{
   path: 'register', 
   component: RegisterComponent,
