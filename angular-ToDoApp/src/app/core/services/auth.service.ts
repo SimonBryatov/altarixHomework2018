@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Cookies from 'js-cookie';
-import { ErrorService } from './error.service';
 import { Router } from '@angular/router';
 import { TodoService } from './todo.service';
-import { LoaderService } from './loader.service';
+import { LoaderService } from 'loader';
 import {share, tap, map, catchError} from 'rxjs/operators';
 import { of, BehaviorSubject } from 'rxjs';
+import { ErrorService } from './error.service';
 
 interface Credentials {
   login: string,
