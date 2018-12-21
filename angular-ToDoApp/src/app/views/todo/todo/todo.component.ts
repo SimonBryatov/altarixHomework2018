@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ToDo, TodoService } from '../../services/todo.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ToDo, TodoService } from 'src/app/core/services/todo.service';
 
 @Component({
   selector: 'app-todo',

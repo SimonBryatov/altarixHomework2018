@@ -17,6 +17,26 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "error-lib": [
+        "dist/error-lib"
+      ],
+      "error-lib/*": [
+        "dist/error-lib/*"
+      ],
+      "error": [
+        "dist/error"
+      ],
+      "error/*": [
+        "dist/error/*"
+      ],
+      "loader": [
+        "dist/loader"
+      ],
+      "loader/*": [
+        "dist/loader/*"
+      ]
+    }
   }
 }

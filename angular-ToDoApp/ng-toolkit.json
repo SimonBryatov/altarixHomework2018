@@ -1,0 +1,12 @@
+{
+  "universal": {
+    "project": "angular-ToDoApp",
+    "skipInstall": false,
+    "directory": "."
+  },
+  "pwa": {
+    "directory": ".",
+    "skipInstall": true,
+    "project": "angular-ToDoApp"
+  }
+}

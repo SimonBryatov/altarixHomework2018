@@ -2,10 +2,10 @@
   <h2>Todo App Pro 9000+ (Angular Edition)</h2>
   <div>
   <a *ngIf='userName$ | async'>{{'Привет, ' + (userName$ | async)}}</a>
-  <a *ngIf='! (isAuthorized$ | async)' href='#' routerLink='/login'>Вход</a>
-  <a *ngIf='! (isAuthorized$ | async)' href='#' routerLink='/register'>Регистрация</a>
+  <a *ngIf='! (isAuthorized$ | async)' href='#' routerLink='/auth/login'>Вход</a>
+  <a *ngIf='! (isAuthorized$ | async)' href='#' routerLink='/auth/register'>Регистрация</a>
   <a *ngIf='isAuthorized$ | async' href='#' routerLink='/todoList'>Мои ToDo</a>
-  <a *ngIf='isAuthorized$ | async' href='#' routerLink='/addTodo'>Новый ToDo</a>
+  <a *ngIf='isAuthorized$ | async' href='#' routerLink='/todoList/addTodo'>Новый ToDo</a>
   <a *ngIf='isAuthorized$ | async' href='#' routerLink='/' (click)='onLogout()'>Выйти</a>
   </div>
 </div>
